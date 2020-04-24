@@ -9,8 +9,9 @@ class UsersController < ApplicationController
     end
 
     def validate
-        id = decode_token
+        id = decode_token["id"]
         user = User.find_by(id: id)
+        # byebug
         if user
             render json: {message: "success", email: user.email, token: generate_token(id: user.id) }
         else
