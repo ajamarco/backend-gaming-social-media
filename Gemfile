@@ -19,6 +19,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Include JWT gem so that we can encode and decode JSON Web Tokens
 gem 'jwt'
 
+#generate fake data for seed
+gem 'faker'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
