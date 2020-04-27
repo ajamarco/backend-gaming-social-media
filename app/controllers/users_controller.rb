@@ -4,14 +4,14 @@ class UsersController < ApplicationController
         if (user == "")
             user = User.find_by(email: params[:email])
             if user && user.authenticate(params[:password])
-                render json: {message: "success", email: user.email, token: generate_token(id: user.id) }
+                render json: {message: "success", id: user.id, email: user.email, created_at: user.created_at, token: generate_token(id: user.id) }
             else
                 render json: {message: "failure"}
             end
         #if a user just sign up and will authenticate it
         else
             if user && user.authenticate(user.password)
-                render json: {message: "success", email: user.email, token: generate_token(id: user.id) }
+                render json: {message: "success", id: user.id, email: user.email, created_at: user.created_at, token: generate_token(id: user.id) }
             else
                 render json: {message: "failure"}        
             end
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
         user = User.find_by(id: id)
        
         if user
-            render json: {message: "success", email: user.email, token: generate_token(id: user.id) }
+            render json: {message: "success", id: user.id, email: user.email, created_at: user.created_at, token: generate_token(id: user.id) }
         else
             render json: {message: "failure"}
         end
