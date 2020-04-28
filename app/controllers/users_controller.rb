@@ -63,9 +63,12 @@ class UsersController < ApplicationController
             website: user.website,
             bio: user.bio,
             location: user.location,
-            created_at: user.created_at, 
+            created_at: user.created_at,
+            likes: user.get_users_likes,
             token: generate_token(id: user.id) }
     end
+
+    
 
 
     private
