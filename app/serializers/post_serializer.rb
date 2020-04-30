@@ -1,5 +1,5 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :content, :likes_number, :created_at, :user
+  attributes :id, :content, :likes_number, :created_at, :comments_on_post, :user
   
   def user
     {user_id: self.object.user.id, 
@@ -9,4 +9,9 @@ class PostSerializer < ActiveModel::Serializer
   def likes_number
     self.object.likes.count
   end
+
+  def comments_on_post
+    self.object.comments
+  end
+
 end
