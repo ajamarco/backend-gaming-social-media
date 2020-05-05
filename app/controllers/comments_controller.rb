@@ -11,4 +11,9 @@ class CommentsController < ApplicationController
             render json: {status: 'ERROR', message:'comment not saved', data:comment.errors},status: :unprocessable_entity
         end
     end
+
+    def index
+        comments = Comment.all
+        render json: comments
+    end
 end

@@ -10,8 +10,18 @@ class PostSerializer < ActiveModel::Serializer
     self.object.likes.count
   end
 
+  # def comments_on_post
+  #   self.object.comments.order("created_at DESC")
+  # end
   def comments_on_post
-    self.object.comments.order("created_at DESC")
+    customized_comments = []
+    self.object.comments.order("created_at DESC").each do |comment|
+      custom_comment = comment.attributes
+      custom_comment[:user] = comment.user.slice(:email)
+      customized_comments.push(custom_comment)
+    end
+    # self.object.comments.order("created_at DESC")
+    return customized_comments
   end
 
 end
