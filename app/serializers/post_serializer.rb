@@ -11,7 +11,7 @@ class PostSerializer < ActiveModel::Serializer
   end
 
   def comments_on_post
-    self.object.comments
+    self.object.comments.order("created_at DESC")
   end
 
 end

@@ -2,8 +2,11 @@ class PostsController < ApplicationController
     def index
         posts = Post.all.order("created_at DESC")
 
-        # have to be called like this for serialize to work
         render json: posts
+        # render json: {
+        #     posts: posts
+        # }, :include => [{:comments => {:include => {:user => {:only => :email}}}}, :user]   
+
     end
 
     def create

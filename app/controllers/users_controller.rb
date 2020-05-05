@@ -19,9 +19,17 @@ class UsersController < ApplicationController
         end
     end
 
+    def show
+        user = User.find(params[:id])
+        if user
+            render json: user
+        end
+    end
+
     def create
         user = User.new(user_params)
         #TODO verify if password matches // email is unique, error handling
+        user.img_url = 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
         if user.save
             sign_in(user)
         else
@@ -62,6 +70,7 @@ class UsersController < ApplicationController
             email: user.email,
             website: user.website,
             bio: user.bio,
+            img_url: user.img_url,
             location: user.location,
             created_at: user.created_at,
             likes: user.get_users_likes,
@@ -74,7 +83,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :bio, :website, :location)
+    params.require(:user).permit(:email, :password, :password_confirmation, :bio, :website, :location, :img_url)
     end
 
     
