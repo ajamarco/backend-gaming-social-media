@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
     def secret
-        Rails.application.credentials.secret_key_base
+        # Rails.application.credentials.secret_key_base
+        ENV["JWT_TOKEN_SECRET"]
     end
 
     def generate_token(data)
