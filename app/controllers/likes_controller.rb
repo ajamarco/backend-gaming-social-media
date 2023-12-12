@@ -1,4 +1,7 @@
+# The LikesController handles the creation and deletion of likes for posts.
+
 class LikesController < ApplicationController
+    # Creates a new like for a post.
     def create
         post_id = params[:postId]
         user_id = params[:userId]
@@ -13,6 +16,7 @@ class LikesController < ApplicationController
         end
     end
 
+    # Deletes a like for a post.
     def destroy
         post_id = params[:postId]
         user_id = params[:userId]
@@ -23,6 +27,7 @@ class LikesController < ApplicationController
 
     private
 
+    # Defines the permitted parameters for creating a like.
     def like_params
         params.require(:like).permit(:userId, :postId)
     end

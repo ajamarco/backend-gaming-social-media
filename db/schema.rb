@@ -16,9 +16,9 @@ ActiveRecord::Schema.define(version: 2020_05_04_181450) do
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.string "content"
-    t.bigint "post_id", null: false
-    t.bigint "user_id", null: false
+    t.string "content" # Content of the comment
+    t.bigint "post_id", null: false # Foreign key for the associated post
+    t.bigint "user_id", null: false # Foreign key for the user who made the comment
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 2020_05_04_181450) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false # Foreign key for the user who liked the post
+    t.bigint "post_id", null: false # Foreign key for the liked post
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_likes_on_post_id"
@@ -35,23 +35,23 @@ ActiveRecord::Schema.define(version: 2020_05_04_181450) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "content"
-    t.integer "number_of_likes"
-    t.bigint "user_id", null: false
+    t.string "content" # Content of the post
+    t.integer "number_of_likes" # Number of likes the post has
+    t.bigint "user_id", null: false # Foreign key for the user who made the post
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "password_digest"
+    t.string "email" # Email of the user
+    t.string "password_digest" # Password digest for authentication
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "bio"
-    t.string "location"
-    t.string "website"
-    t.string "img_url"
+    t.string "bio" # User's bio
+    t.string "location" # User's location
+    t.string "website" # User's website
+    t.string "img_url" # URL of user's profile image
   end
 
   add_foreign_key "comments", "posts"

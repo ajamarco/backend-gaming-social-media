@@ -1,14 +1,16 @@
+# The PostsController handles the CRUD operations for posts in the backend gaming social media application.
+
 class PostsController < ApplicationController
+    # GET /posts
+    # Returns all posts in descending order of creation.
     def index
         posts = Post.all.order("created_at DESC")
 
         render json: posts
-        # render json: {
-        #     posts: posts
-        # }, :include => [{:comments => {:include => {:user => {:only => :email}}}}, :user]   
-
     end
 
+    # POST /posts
+    # Creates a new post with the given content and user_id.
     def create
         content = params[:content]
         user_id = params[:user_id]
@@ -21,6 +23,8 @@ class PostsController < ApplicationController
         end
     end
 
+    # GET /posts/:id
+    # Returns the post with the specified id.
     def show
         post = Post.find(params[:id])
         if post
@@ -28,8 +32,9 @@ class PostsController < ApplicationController
         end
     end
 
+    # DELETE /posts/:id
+    # Deletes the post with the specified id.
     def destroy
-        # byebug
         post = Post.find(params[:id])
         post.destroy
         render json: {status: 'SUCCESS', message:'Deleted article', data: post.id},status: :ok
